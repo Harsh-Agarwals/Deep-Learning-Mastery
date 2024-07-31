@@ -1,0 +1,19 @@
+### Neural Networks from Scratch
+
+# This part of the repository will contains different building blocks of Neural Network, all made from Scratch in modular programming structure (classes and multiple files).
+
+
+# This will contains:
+- Simple Neural Network
+- Forward Propagation
+- Backpropagation
+- Various Cost functions (binary cross entropy, log loss, etc)
+- Various Non-linear activations (tanh, sigmoid, etc)
+- Different kind of optimization (Adam, momentum, etc)
+- Gradient Descent variations (SGD, Mini-Batch, etc)
+- Deep Neural Networks
+- Dropout layers
+- Batch Normalization
+- Graphical analysis of NN
+- Runtime analysis
+- Running NN on GPUs
