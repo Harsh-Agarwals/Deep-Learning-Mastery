@@ -1,7 +1,7 @@
 import numpy as np
 
 def mean_squared_error(y, a):
-    return -2*np.mean(np.sum(np.power(y-a, 2)))
+    return -np.mean(np.sum(np.power(y-a, 2)))
 
 def mean_absolute_error(y, a):
     return np.mean(np.sum(np.abs(y - a)))

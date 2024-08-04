@@ -1,7 +1,7 @@
 import numpy as np
 
 def sigmoid(z):
-    return 1/(a+np.exp(-z))
+    return 1/(1+np.exp(-z))
 
 def tanh(z):
     return (np.exp(z) - np.exp(-z))/(np.exp(z) + np.exp(-z))
