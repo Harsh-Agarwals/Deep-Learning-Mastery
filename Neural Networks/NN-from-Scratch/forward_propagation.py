@@ -5,6 +5,7 @@ from loss import mean_squared_error, mean_absolute_error, binary_cross_entropy_e
 def forward_prop(X, y, layers, layer_neurals, parameters, layer_activations, loss):
     activations = {}
     activations['a_0'] = X.T
+    cost = None
     
     for i in range(1, layers+1):
         activations['z_'+str(i)] = np.dot(parameters['w'+str(i)], activations['a_'+str(i-1)]) + parameters['b'+str(i)]
@@ -26,8 +27,6 @@ def forward_prop(X, y, layers, layer_neurals, parameters, layer_activations, los
                 raise TypeError("Wrong loss function, please choose among('mse', 'mae', 'bce', 'categorical_ce')")
         else:
             activation = layer_activations[i-1]
-            # if activation=="softmax":
-                # activations['a_'+str(i)] = softmax(activations['z_'+str(i)])
             if activation=="relu":
                 activations['a_'+str(i)] = relu(activations['z_'+str(i)])
             elif activation=="leaky_relu":
