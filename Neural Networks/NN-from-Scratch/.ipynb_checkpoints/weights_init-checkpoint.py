@@ -12,7 +12,7 @@ def randomInitialization(neuron_layers):
     parameters = {}
     L=len(neuron_layers)-1
     for i in range(1, L+1):
-        parameters['w'+str(i)] = np.random.randn(neuron_layers[i], neuron_layers[i-1])*0.03
+        parameters['w'+str(i)] = np.random.randn(neuron_layers[i], neuron_layers[i-1])*0.3
         parameters['b'+str(i)] = np.zeros((neuron_layers[i], 1))
     return parameters
 
