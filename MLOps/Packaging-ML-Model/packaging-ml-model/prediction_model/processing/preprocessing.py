@@ -2,6 +2,10 @@ from sklearn.base import BaseEstimator,TransformerMixin
 from prediction_model.config import config
 import numpy as np
 
+# fit and transform methods are defined here because these classes will be used in sklearn pipeline
+# which expects classes to have fit and transform methods
+
+# Mean imputation
 class MeanImputer(BaseEstimator,TransformerMixin):
     def __init__(self,variables=None):
         self.variables = variables
@@ -17,6 +21,7 @@ class MeanImputer(BaseEstimator,TransformerMixin):
             X[col].fillna(self.mean_dict[col],inplace=True)
         return X
     
+# Mode Imputation
 class ModeImputer(BaseEstimator,TransformerMixin):
     def __init__(self,variables=None):
         self.variables = variables
@@ -32,6 +37,7 @@ class ModeImputer(BaseEstimator,TransformerMixin):
             X[col].fillna(self.mode_dict[col],inplace=True)
         return X
     
+# Drop Columns
 class DropColumns(BaseEstimator,TransformerMixin):
     def __init__(self,variables_to_drop=None):
         self.variables_to_drop = variables_to_drop
@@ -43,35 +49,40 @@ class DropColumns(BaseEstimator,TransformerMixin):
         X.drop(columns=[self.variables_to_drop], inplace=True)
         return X
     
-class DomainProcessing(BaseEstimator, TransformerMixin):
-    def __init__(self, variable_to_add=None, variable_to_modify=None):
-        self.variable_to_add = variable_to_add
+# Domain Processing
+class DomainProcessing(BaseEstimator,TransformerMixin):
+    def __init__(self,variable_to_modify = None, variable_to_add = None):
         self.variable_to_modify = variable_to_modify
-
-    def fit(self, X, y=None):
+        self.variable_to_add = variable_to_add
+    
+    def fit(self,X,y=None):
         return self
     
-    def transform(self, X):
+    def transform(self,X):
+        X = X.copy()
         for feature in self.variable_to_modify:
             X[feature] = X[feature] + X[self.variable_to_add]
         return X
     
-class CustomLabelEncoder(BaseEstimator, TransformerMixin):
+# Custom Label Encoder
+class CustomLabelEncoder(BaseEstimator,TransformerMixin):
     def __init__(self, variables=None):
-        self.variables = variables
-
-    def fit(self, X, y=None):
+        self.variables=variables
+    
+    def fit(self, X,y):
         self.label_dict = {}
         for var in self.variables:
-            t = X[var].value_counts().sort_values(ascending=True).index
-            self.label_dict[var] = {k: i for i, k in enumerate(t, 0)}
-        return X
+            t = X[var].value_counts().sort_values(ascending=True).index 
+            self.label_dict[var] = {k:i for i,k in enumerate(t,0)}
+        return self
     
-    def tranform(self, X):
+    def transform(self,X):
+        X=X.copy()
         for feature in self.variables:
             X[feature] = X[feature].map(self.label_dict[feature])
         return X
     
+# Log Transform
 class LogTransform(BaseEstimator, TransformerMixin):
     def __init__(self, variables):
         self.variables = variables
