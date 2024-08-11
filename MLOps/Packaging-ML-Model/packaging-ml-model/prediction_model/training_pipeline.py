@@ -18,7 +18,7 @@ warnings.filterwarnings('ignore')
 
 def perform_training():
     data = load_dataset(config.TRAIN_FILE)
-    train_y = data[config.TARGET].map({'NO': 0, 'YES': 1})
+    train_y = data[config.TARGET].map({'N': 0, 'Y': 1})
     pipeline.classification_pipeline.fit(data[config.FEATURES], train_y)
     save_pipeline(pipeline.classification_pipeline)
 

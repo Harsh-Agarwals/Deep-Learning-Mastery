@@ -29,12 +29,12 @@ class ModeImputer(BaseEstimator,TransformerMixin):
     def fit(self,X,y=None):
         self.mode_dict = {}
         for col in self.variables:
-            self.mode_dict[col] = X[col].mode()
+            self.mode_dict[col] = X[col].mode()[0]
         return self
     
     def transform(self,X):
         for col in self.variables:
-            X[col].fillna(self.mode_dict[col],inplace=True)
+            X[col] = X[col].fillna(self.mode_dict[col])
         return X
     
 # Drop Columns
@@ -46,7 +46,7 @@ class DropColumns(BaseEstimator,TransformerMixin):
         return self
     
     def transform(self,X):
-        X.drop(columns=[self.variables_to_drop], inplace=True)
+        X.drop(columns=self.variables_to_drop, inplace=True)
         return X
     
 # Domain Processing
