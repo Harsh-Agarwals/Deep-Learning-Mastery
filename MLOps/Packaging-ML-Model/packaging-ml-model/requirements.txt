@@ -6,3 +6,4 @@ scikit-learn==1.2.2
 scipy==1.12.0
 setuptools==68.2.2
 wheel==0.41.2
+pytest==8.3.2

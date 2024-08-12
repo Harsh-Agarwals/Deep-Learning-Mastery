@@ -16,7 +16,7 @@ from prediction_model.processing.data_handling import load_pipeline, load_datase
 
 model_pipeline = load_pipeline(config.MODEL_NAME)
 
-# Generating predictions on random data
+# Generating predictions on random data - for testing
 def predict_values(data_file):
     data = pd.DataFrame(data_file)
     preds = model_pipeline.predict(data[config.FEATURES])
