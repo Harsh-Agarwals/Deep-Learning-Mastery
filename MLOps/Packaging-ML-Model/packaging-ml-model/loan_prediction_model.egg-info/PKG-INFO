@@ -1,0 +1,23 @@
+Metadata-Version: 2.1
+Name: loan-prediction-model
+Version: 1.0.0
+Summary: ML model package for prediction of Loan
+Home-page: https://github.com/Harsh-Agarwals/Deep-Learning-Mastery/tree/main/MLOps/Packaging-ML-Model
+Author: Harsh Agarwal
+Author-email: harshag.code@gmail.com
+License: MIT
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: Implementation :: CPython
+Classifier: Programming Language :: Python :: Implementation :: PyPy
+Requires-Python: >=3.7.0
+Requires-Dist: numpy==1.26.4
+Requires-Dist: pandas==2.2.1
+Requires-Dist: joblib==1.3.2
+Requires-Dist: scikit-learn==1.2.2
+Requires-Dist: scipy==1.12.0
+Requires-Dist: setuptools==68.2.2
+Requires-Dist: wheel==0.41.2
+Requires-Dist: pytest==8.3.2

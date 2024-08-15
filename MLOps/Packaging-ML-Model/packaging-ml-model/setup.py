@@ -2,6 +2,8 @@ import os
 from pathlib import Path
 
 from setuptools import setup, find_packages
+import warnings
+warnings.filterwarnings('ignore')
 
 # Metadata
 NAME='loan-prediction-model'
@@ -15,13 +17,16 @@ REQUIRES_PYTHON='>=3.7.0'
 pwd = os.path.abspath(os.path.dirname(__file__))
 
 with open(os.path.join(pwd, 'requirements.txt')) as reqmt:
-    requirements = reqmt.readlines().splitlines()[1:]
+    requirements = reqmt.readlines()
+    
+# requirements = [req[:-1] for req in requirements]
+requirements = [req.strip() for req in requirements][1:]
 
 ROOT_DIR = Path(__file__).resolve().parent
 PACKAGE_DIR = ROOT_DIR / 'prediction_model'
 about = {}
 with open(PACKAGE_DIR / 'VERSION') as vers:
-    vx = vers.read().split()
+    vx = vers.read().strip()
     about['__version__'] = vx
     
 
