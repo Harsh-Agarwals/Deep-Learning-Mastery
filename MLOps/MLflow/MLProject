@@ -1,0 +1,7 @@
+name: loan_prediction
+
+conda_env: my_conda_env.yaml
+
+entry_points:
+  main:
+    command: "python loan_prediction.py"
