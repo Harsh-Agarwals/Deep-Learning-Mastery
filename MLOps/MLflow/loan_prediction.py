@@ -96,11 +96,11 @@ def eval_metrics(preds, real):
     plt.close()
     return(accuracy, f1_sc, aucx)
 
-mlflow.set_experiment("loan_prediction")
+mlflow.set_experiment("loan_prediction2")
 mlflow.set_tracking_uri(uri="http://127.0.0.1:5000/")
 
 def mlflow_logging(model, X, y, name):
-    with mlflow.start_run():
+    with mlflow.start_run(run_name=name):
         mlflow.set_tag("name", name)
         preds = model.predict(X)
         (accuracy, f1s, aucx) = eval_metrics(preds, y)
