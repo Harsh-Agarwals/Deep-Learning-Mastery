@@ -19,7 +19,6 @@ model_pipeline = load_pipeline(config.MODEL_NAME)
 # Generating predictions on random data - for testing
 def predict_values(data_file):
     data = pd.DataFrame(data_file)
-    print(data)
     preds = model_pipeline.predict(data[config.FEATURES])
     print("LOADED")
     output = np.where(preds==1, "Y", "N")
