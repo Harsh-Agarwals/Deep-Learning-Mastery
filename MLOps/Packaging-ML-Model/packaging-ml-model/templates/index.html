@@ -64,7 +64,7 @@
     <h1>LOAN PREDICTION APP</h1>
     <h2>Enter these fields to get the final predictions for your loan:</h2>
 
-    <form action="#" method="GET" class="loan-form">
+    <form action="/loan-prediction" method="POST" id="loan-form">
         <div>
             <label for="Loan_ID">Loan ID</label>
             <input type="text" name="Loan_ID" id="Loan_ID" placeholder="Loan ID" required>
@@ -99,10 +99,10 @@
         <div class="radio-div">
             <label for="Self_Employed">Self Employed</label>
             <span>
-                <input type="radio" name="Self_Employed" id="Yes" value="Yes" required>
-                <label for="Yes">Yes</label>
-                <input type="radio" name="Self_Employed" id="No" value="No">
-                <label for="No">No</label>
+                <input type="radio" name="Self_Employed" id="Yes2" value="Yes" required>
+                <label for="Yes2">Yes</label>
+                <input type="radio" name="Self_Employed" id="No2" value="No">
+                <label for="No2">No</label>
             </span>
         </div>
         <div>
@@ -124,10 +124,10 @@
         <div class="radio-div">
             <label for="Credit_History">Credit History</label>
             <span>
-                <input type="radio" name="Credit_History" id="Yes" value="Yes" required>
-                <label for="Yes">Yes</label>
-                <input type="radio" name="Credit_History" id="No" value="No">
-                <label for="No">No</label>
+                <input type="radio" name="Credit_History" id="Yes1" value="1" required>
+                <label for="Yes1">Yes</label>
+                <input type="radio" name="Credit_History" id="No1" value="0">
+                <label for="No1">No</label>
             </span>
         </div>
         <div>
@@ -142,22 +142,50 @@
             <input type="submit" value="Check" name="submit">
         </div>
     </form>
-    <h2 class="result hidden">{{status}}</h2>
+    <h2 class="result hidden"></h2>
 
     <script>
-        form = document.querySelector(".loan-form")
-        result = document.getElementsByClassName("result")[0]
-        form.addEventListener('submit', (event) => {
-            // event.preventDefault()
-            result.classList.remove("hidden")
-            text = result.textContent
-            if (test == "Eligible") {
-                result.style.backgroundColor = rgba(188, 245, 188, 0.9)
-            } else {
-                result.style.backgroundColor = rgba(248, 180, 180, 0.9)
-            }
-        })
+        document.getElementById('loan-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+    
+            // Correctly initializing the formData variable
+            const formData = new FormData(this);
+    
+            // Sending the data via a POST request to the Flask backend
+            fetch('/loan-prediction', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => {
+                console.log(response);
+                if (!response.ok) {
+                    throw new Error("Network response was NOT OKAY :(")
+                }
+                return response.json()
+            })
+            .then(data => {
+                console.log(data);                
+                const result = document.querySelector('.result');
+                result.textContent = `Loan Status: ${data.final}`;
+                result.classList.remove('hidden');
+    
+                // Setting the background color based on the result
+                if (data.final === 'Eligible') {
+                    result.style.backgroundColor = 'rgba(188, 245, 188, 0.9)';
+                } else {
+                    result.style.backgroundColor = 'rgba(248, 180, 180, 0.9)';
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                const result = document.querySelector('.result');
+                result.textContent = 'An error occurred. Please try again.';
+                result.style.backgroundColor = 'rgba(248, 180, 180, 0.9)';
+                result.classList.remove('hidden');
+            });
+        });
     </script>
+    
     
 </body>
 </html>
