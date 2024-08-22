@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Harsh Agarwal">
+    <meta name="description" content="Web app with flask for loan prediction ML model"
+    <title>Load Prediction ML app</title>
+    <style>
+        body {
+            text-align: center;
+            margin: 5rem auto;
+            border: 2px solid lightskyblue;
+            width: 600px;
+            padding: 2rem 3rem;
+            border-radius: 1rem;
+        }
+        form {
+            text-align: left;
+            font-size: 1.1rem;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        }
+        input, select {
+            box-sizing: border-box;
+            width: 60%;
+            margin: 8px;
+            font-size: 0.9rem;
+            padding: 2px 8px;
+        }
+        input[type="submit"] {
+            width: 30%;
+            padding: 8px;
+            font-weight: bold;
+            letter-spacing: 0.5px;
+            font-size: 1rem;
+            background: green;
+            border: none;
+            outline: none;
+            color: white;
+            border-radius: 8px;
+            margin: 1rem;
+            cursor: pointer;
+        }
+        .radio-div {
+            display: flex;
+        }
+        span {
+            display: block;
+            margin-left: 1rem;
+        }
+        input[type="radio"] {
+            width: auto;
+        }
+        .hidden {
+            display: none;
+        }
+        .result {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>LOAN PREDICTION APP</h1>
+    <h2>Enter these fields to get the final predictions for your loan:</h2>
+
+    <form action="#" method="GET" class="loan-form">
+        <div>
+            <label for="Loan_ID">Loan ID</label>
+            <input type="text" name="Loan_ID" id="Loan_ID" placeholder="Loan ID" required>
+        </div>
+        <div>
+            <label for="Gender">Gender</label>
+            <select name="Gender" id="Gender" required>
+                <option value="Male" selected>Male</option>
+                <option value="Female">Female</option>
+            </select>
+        </div>
+        <div class="radio-div">
+            <label for="Married">Married</label>
+            <span>
+                <input type="radio" name="Married" id="Yes" value="Yes" required>
+                <label for="Yes">Yes</label>
+                <input type="radio" name="Married" id="No" value="No">
+                <label for="No">No</label>
+            </span>
+        </div>
+        <div>
+            <label for="">Dependents</label>
+            <input type="number" name="Dependents" id="Dependents" min=0 max=10 placeholder="Dependents" required>
+        </div>
+        <div>
+            <label for="Education">Education</label>
+            <select name="Education" id="Education" required>
+                <option value="Graduate" selected>Graduate</option>
+                <option value="NotGraduate">Not Graduate</option>
+            </select>
+        </div>
+        <div class="radio-div">
+            <label for="Self_Employed">Self Employed</label>
+            <span>
+                <input type="radio" name="Self_Employed" id="Yes" value="Yes" required>
+                <label for="Yes">Yes</label>
+                <input type="radio" name="Self_Employed" id="No" value="No">
+                <label for="No">No</label>
+            </span>
+        </div>
+        <div>
+            <label for="ApplicantIncome">Applicant Income</label>
+            <input type="number" name="ApplicantIncome" id="ApplicantIncome" placeholder="Applicant Income" required>
+        </div>
+        <div>
+            <label for="CoapplicantIncome">Co-applicant Income</label>
+            <input type="number" name="CoapplicantIncome" id="CoapplicantIncome" placeholder="Co-applicant Income" required>
+        </div>
+        <div>
+            <label for="LoanAmount">Loan Amount</label>
+            <input type="number" name="LoanAmount" id="LoanAmount" placeholder="Loan Amount" required>
+        </div>
+        <div>
+            <label for="Loan_Amount_Term">Loan Amount Term</label>
+            <input type="number" name="Loan_Amount_Term" id="Loan_Amount_Term" placeholder="Loan Amount Term" required>
+        </div>
+        <div class="radio-div">
+            <label for="Credit_History">Credit History</label>
+            <span>
+                <input type="radio" name="Credit_History" id="Yes" value="Yes" required>
+                <label for="Yes">Yes</label>
+                <input type="radio" name="Credit_History" id="No" value="No">
+                <label for="No">No</label>
+            </span>
+        </div>
+        <div>
+            <label for="Property_Area">Property Area</label>
+            <select name="Property_Area" id="Property_Area" required>
+                <option value="Urban" selected>Urban</option>
+                <option value="Semiurban">Semiurban</option>
+                <option value="Rural">Rural</option>
+            </select>
+        </div>
+        <div style="text-align: center;">
+            <input type="submit" value="Check" name="submit">
+        </div>
+    </form>
+    <h2 class="result hidden">{{status}}</h2>
+
+    <script>
+        form = document.querySelector(".loan-form")
+        result = document.getElementsByClassName("result")[0]
+        form.addEventListener('submit', (event) => {
+            // event.preventDefault()
+            result.classList.remove("hidden")
+            text = result.textContent
+            if (test == "Eligible") {
+                result.style.backgroundColor = rgba(188, 245, 188, 0.9)
+            } else {
+                result.style.backgroundColor = rgba(248, 180, 180, 0.9)
+            }
+        })
+    </script>
+    
+</body>
+</html>

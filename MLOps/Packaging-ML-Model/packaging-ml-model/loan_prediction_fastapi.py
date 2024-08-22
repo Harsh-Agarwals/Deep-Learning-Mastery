@@ -46,7 +46,11 @@ async def predict(user_dict: UserData):
         "Property_Area": data['Property_Area']
         }
     df = pd.DataFrame([data_dict])
-    result = MODEL.predict(df[config.FEATURES])
+    print(df)
+    print(df.shape)
+    print(df.columns)
+    # result = MODEL.predict([df[config.FEATURES]])
+    result = predict_values([df])
     return result
 
 if __name__=="__main__":
