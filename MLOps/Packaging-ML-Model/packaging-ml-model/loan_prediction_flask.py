@@ -32,19 +32,21 @@ def home():
 def home_page():
     try:
         if request.method == 'POST':
-            data = {}
-            for i in request.args:
-                data[i] = request.args.get(i)
-            del data['submit']
-            data = transform_to_integers(data)
-            data = transform_to_float(data)
-            df = pd.DataFrame([data]).iloc[0, :]
-            result = predict_values([df])
-            prediction = 'Eligible' if result['Predictions'][0] == 'Y' else 'Ineligible'
-            return jsonify(final=prediction)
-        else:
-            return jsonify(error="Invalid request method. Only POST is allowed."), 405
-
+            if request.args.get("submit") == None:
+                return 
+            elif request.args.get("submit") == "":
+                return "<h1>INVALID, please try again!</h1>"
+            else:
+                data = {}
+                for i in request.args:
+                    data[i] = request.args.get(i)
+                del data['submit']
+                data = transform_to_integers(data)
+                data = transform_to_float(data)
+                df = pd.DataFrame([data]).iloc[0, :]
+                result = predict_values([df])
+                prediction = 'Eligible' if result['Predictions'][0] == 'Y' else 'Ineligible'
+                return jsonify(final=prediction)
     except Exception as e:
         print(f"Error: {e}")
         return str(e)

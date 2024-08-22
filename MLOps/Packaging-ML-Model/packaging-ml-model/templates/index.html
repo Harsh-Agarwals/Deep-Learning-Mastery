@@ -142,7 +142,7 @@
             <input type="submit" value="Check" name="submit">
         </div>
     </form>
-    <h2 class="result hidden"></h2>
+    <h2 class="result hidden">{{final}}</h2>
 
     <script>
         document.getElementById('loan-form').addEventListener('submit', function(event) {
@@ -166,10 +166,9 @@
             .then(data => {
                 console.log(data);                
                 const result = document.querySelector('.result');
-                result.textContent = `Loan Status: ${data.final}`;
+                result.textContent = data.final;
                 result.classList.remove('hidden');
     
-                // Setting the background color based on the result
                 if (data.final === 'Eligible') {
                     result.style.backgroundColor = 'rgba(188, 245, 188, 0.9)';
                 } else {

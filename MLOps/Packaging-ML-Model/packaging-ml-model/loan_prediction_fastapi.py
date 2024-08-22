@@ -14,7 +14,7 @@ class UserData(BaseModel):
     Loan_ID: str
     Gender: str 
     Married: str 
-    Dependents: int 
+    Dependents: str
     Education: str
     Self_Employed: str 
     ApplicantIncome: int
@@ -38,20 +38,16 @@ async def predict(user_dict: UserData):
         "Dependents": data['Dependents'],
         "Education": data['Education'],
         "Self_Employed": data['Self_Employed'],
-        "ApplicantIncome": data['ApplicantIncome'],
-        "CoapplicantIncome": data['CoapplicantIncome'],
-        "LoanAmount": data['LoanAmount'],
-        "Loan_Amount_Term": data['Loan_Amount_Term'],
-        "Credit_History": data['Credit_History'],
+        "ApplicantIncome": int(data['ApplicantIncome']),
+        "CoapplicantIncome": int(data['CoapplicantIncome']),
+        "LoanAmount": int(data['LoanAmount']),
+        "Loan_Amount_Term": float(data['Loan_Amount_Term']),
+        "Credit_History": float(data['Credit_History']),
         "Property_Area": data['Property_Area']
         }
-    df = pd.DataFrame([data_dict])
-    print(df)
-    print(df.shape)
-    print(df.columns)
-    # result = MODEL.predict([df[config.FEATURES]])
-    result = predict_values([df])
-    return result
+    df = pd.DataFrame([data_dict]).iloc[0, :]
+    result = predict_values([df])['Predictions'][0]
+    return {'Result': result}
 
 if __name__=="__main__":
     uvicorn.run(app, host="0.0.0.0", port=int(os.environ.get("PORT", 8000)))
