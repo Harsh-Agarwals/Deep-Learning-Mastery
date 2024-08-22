@@ -32,21 +32,29 @@ def home():
 def home_page():
     try:
         if request.method == 'POST':
-            if request.args.get("submit") == None:
-                return 
-            elif request.args.get("submit") == "":
-                return "<h1>INVALID, please try again!</h1>"
-            else:
-                data = {}
-                for i in request.args:
-                    data[i] = request.args.get(i)
-                del data['submit']
-                data = transform_to_integers(data)
-                data = transform_to_float(data)
-                df = pd.DataFrame([data]).iloc[0, :]
-                result = predict_values([df])
-                prediction = 'Eligible' if result['Predictions'][0] == 'Y' else 'Ineligible'
-                return jsonify(final=prediction)
+            request_data = dict(request.form)
+            request_data = {k:v for k, v in request_data.items()}
+            request_data = transform_to_integers(request_data)
+            request_data = transform_to_float(request_data)
+            df = pd.DataFrame([request_data]).iloc[0, :]
+            result = predict_values([df])
+            prediction = 'Eligible' if result['Predictions'][0] == 'Y' else 'Ineligible'
+            return jsonify(final=prediction)
+            # if request.args.get("submit") == None:
+            #     return 
+            # elif request.args.get("submit") == "":
+            #     return "<h1>INVALID, please try again!</h1>"
+            # else:
+            #     data = {}
+            #     for i in request.args:
+            #         data[i] = request.args.get(i)
+            #     del data['submit']
+            #     data = transform_to_integers(data)
+            #     data = transform_to_float(data)
+            #     df = pd.DataFrame([data]).iloc[0, :]
+            #     result = predict_values([df])
+            #     prediction = 'Eligible' if result['Predictions'][0] == 'Y' else 'Ineligible'
+            #     return jsonify(final=prediction)
     except Exception as e:
         print(f"Error: {e}")
         return str(e)

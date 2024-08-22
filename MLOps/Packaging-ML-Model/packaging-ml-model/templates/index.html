@@ -157,14 +157,12 @@
                 body: formData
             })
             .then(response => {
-                console.log(response);
                 if (!response.ok) {
                     throw new Error("Network response was NOT OKAY :(")
                 }
                 return response.json()
             })
             .then(data => {
-                console.log(data);                
                 const result = document.querySelector('.result');
                 result.textContent = data.final;
                 result.classList.remove('hidden');
