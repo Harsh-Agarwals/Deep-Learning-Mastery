@@ -4,3 +4,16 @@ python-dotenv
 langchain-google-genai
 langchain-openai
 streamlit
+langchain-community
+pypdf
+bs4
+arxiv
+pymupdf
+wikipedia
+youtube-transcript-api
+langchain-text-splitters
+lxml
+sentence-transformers
+langchain-huggingface
+faiss-cpu
+chromadb

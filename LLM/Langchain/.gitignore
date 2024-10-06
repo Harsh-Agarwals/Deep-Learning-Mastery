@@ -1,0 +1,6 @@
+.env
+venv/
+
+vector-store/chroma-stor/*
+vector-store/*.pkl
+vector-store/*.faiss
