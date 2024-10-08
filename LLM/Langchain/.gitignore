@@ -1,5 +1,5 @@
-.env
 venv/
+.env
 
 vector-store/chroma-stor/*
 vector-store/*.pkl
