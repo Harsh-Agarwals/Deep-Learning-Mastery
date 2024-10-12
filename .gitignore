@@ -1,0 +1,5 @@
+pytorch/data/
+pytorch/*.pth
+
+LLM/langchain/venv/
+LLM/langchain/.env
