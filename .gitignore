@@ -3,3 +3,5 @@ pytorch/*.pth
 
 LLM/langchain/venv/
 LLM/langchain/.env
+
+NLP/IMDB_project/*.csv
