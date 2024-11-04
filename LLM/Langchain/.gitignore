@@ -5,3 +5,4 @@ vector-store/chroma-stor/*
 vector-store/*.pkl
 vector-store/*.faiss
 RAG/chroma_db/*
+RAG/*.db
