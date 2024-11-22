@@ -22,3 +22,4 @@ groq
 langchain-groq
 langserve[all]
 langchain-cli
+duckduckgo-search
